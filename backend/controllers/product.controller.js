@@ -79,60 +79,8 @@ export const getFeaturedProducts = async (req, res) => {
   }
 };
 
-// export const getFeaturedProducts = async (req, res) => {
-//   try {
-//     // Check if the featured products are cached in Redis
-//     let featuredProducts;
 
-//     try {
-//       featuredProducts = await redis.get("featured_products");
-//     } catch (cacheError) {
-//       console.error("Error accessing Redis cache:", cacheError.message);
-//       // Proceed to fetch from the database if there's an error with Redis
-//     }
 
-//     if (featuredProducts) {
-//       return res.json(JSON.parse(featuredProducts));
-//     }
-
-//     // If not cached, fetch from the MySQL database
-//     const [products] = await pool.query(`
-//       SELECT
-//         p.product_id,
-//         p.product_name,
-//         p.product_description,
-//         p.price,
-//         p.stock_quantity,
-//         p.created_at,
-//         p.updated_at
-//       FROM
-//         Products p
-//       WHERE
-//         p.isFeatured = true
-//     `);
-
-//     if (products.length === 0) {
-//       return res.status(404).json({ message: "No featured products found" });
-//     }
-
-//     // Cache the result in Redis for future requests
-//     try {
-//       await redis.set("featured_products", JSON.stringify(products));
-//     } catch (cacheError) {
-//       console.error(
-//         "Error caching featured products in Redis:",
-//         cacheError.message
-//       );
-//       // You might want to log this but still return the products to the user
-//     }
-
-//     // Return the featured products
-//     res.json(products);
-//   } catch (error) {
-//     console.error("Error in getFeaturedProducts controller:", error.message);
-//     res.status(500).json({ message: "Server error", error: error.message });
-//   }
-// };
 
 export const createProduct = async (req, res) => {
   try {
